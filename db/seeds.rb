@@ -1,7 +1,10 @@
+
+
 horror_id = Genre.create(name: "horror/scary").id
 action_id = Genre.create(name: "action").id
 adventure_id = Genre.create(name: "adventure").id
 romance_id = Genre.create(name: "romance").id
+puts "---- Seeding movie data ---"
 
 # horror movies
 Movie.create(
@@ -134,3 +137,10 @@ Movie.create(
     director_id: Director.find_or_create_by(name: "Mark Casavetes").id,
     genre_id: romance_id
 )
+
+puts "---- Associating movies to User ----"
+## Looking at an array of half the movies
+Movie.all[0..(Movie.all.length/2)].each do |movie|
+    movie.user = User.first
+    movie.save
+end
